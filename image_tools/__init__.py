@@ -20,6 +20,8 @@
 
 # HISTORY
 '''
+23/10/11 0.68
+  misc code changes and comments. pushed in my own git
 21/10/11 0.67
 . installed ubuntu 11.10 (and compiz eye candies :)
 . linux os should be able to drag/resize :
@@ -538,33 +540,33 @@ class ImageTools(bpy.types.PropertyGroup) :
     cropsource = bpy.props.BoolProperty(default=False)
 
     ## returns the temp collection name from this image and a temp id
-    def revision_name(img,id='') :
-        if id == '' : id = img.tempid()
-        if id == -1 : return img.name.replace('.tmp','')
-        return img.name.replace('.tmp','') + str(id)
+    def revision_name(self,rid='') :
+        if rid == '' : rid = self.tempid()
+        if rid == -1 : return self.name.replace('.tmp','')
+        return self.name.replace('.tmp','') + str(rid)
 
     ## returns the temp collection member from this image and a temp id
-    def revision(img,id='') :
+    def revision(self,rid='') :
         imtool = bpy.context.window_manager.imagetools
-        if id == '' : id = img.tempid()
-        if id == -1 : id = 0
-        name = img.revision_name(id)
+        if rid == '' : rid = self.tempid()
+        if rid == -1 : rid = 0
+        name = self.revision_name(rid)
         #print('revision %s name %s :'%(id,name))
         if name in imtool.tempset :
             #print('  exist, returns img')
             return imtool.tempset[name]
-        if id == 0 :
+        if rid == 0 :
             #print('  create revision 0')
-            return img.revision_add(0)
+            return self.revision_add(0)
         return False
 
     ## returns the temp revision id (int)  from this image file name
     # returns -1 if original image
-    def tempid(img) :
-        if '.tmp.' in img.filepath_raw :
-            s = img.filepath_raw.rindex('_') + 1
-            e = img.filepath_raw[s:].index('.') + s
-            return int(img.filepath_raw[s:e])
+    def tempid(self) :
+        if '.tmp.' in self.filepath_raw :
+            s = self.filepath_raw.rindex('_') + 1
+            e = self.filepath_raw[s:].index('.') + s
+            return int(self.filepath_raw[s:e])
         return -1
     
     ## returns the temporary image (the next revision) of an image
@@ -619,7 +621,8 @@ class ImageTools(bpy.types.PropertyGroup) :
         return tmpimg
         
 
-    def revision_add(img,id,path='') :
+    def revision_add(self,id,path='') :
+        img = self
         imtool = bpy.context.window_manager.imagetools
         new = imtool.tempset.add()
         new.created = _time.time()
@@ -758,7 +761,8 @@ class ImageTools(bpy.types.PropertyGroup) :
         img.show()
         return img
 
-    def nconvert(img,args,temp = True) :
+    def nconvert(self,args,temp = True) :
+        img = self
         sce_path = img.filepath_raw
         if args != '' : args += ' -overwrite'
         if temp :

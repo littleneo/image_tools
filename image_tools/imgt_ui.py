@@ -279,9 +279,9 @@ class ImageTools_helpers(bpy.types.PropertyGroup) :
                     area_sx = region.width
                     area_sy = region.height 
 
-                    image_ed, img_ui  = getArea('IMAGE_EDITOR','UI')
-                    img_win  = getRegion(image_ed)
-                    img_prev  = getRegion(image_ed,'PREVIEW')
+                    #image_ed, img_ui  = getArea('IMAGE_EDITOR','UI')
+                    #img_win  = getRegion(image_ed)
+                    #img_prev  = getRegion(image_ed,'PREVIEW')
 
                     zoom_x = area.spaces[0].zoom[0]
                     zoom_y = area.spaces[0].zoom[1]

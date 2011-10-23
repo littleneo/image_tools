@@ -1,0 +1,22 @@
+Image Tools
+
+Blender has builtin function about image edition,
+but for now nothing shows up in the ui about resizing, cropping,
+rotating, mirroring etc.. this should eventually be integrated one day.
+
+meanwhile, this tool integrates the features of nconvert in the image editor
+panel. but watch out about nconvert licence : free for open source or home
+project, contact the author at http://www.xnview.com/en/nconvert.html else.
+
+you need to download nconvert for your os and drop the nconvert folder or
+the nconvert exe into the image tools folder.
+
+tested on windows XP and ubuntu 11.10 so far.
+
+readme wip..
+meanwhile (doc, screencaps, video) :
+
+http://blenderartists.org/forum/showthread.php?231326-a-basic-image-tool-v0.4-%28use-nconvert%29
+http://jerome.le.chat.free.fr/index.php/blender/scripts/addon-image-tools.html
+	
+

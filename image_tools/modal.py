@@ -369,7 +369,7 @@ class WM_OT_modal(bpy.types.Operator):
             context.window_manager.modal_handler_add(self)
             
             #print('ctx area : %s'%context.area.type,3)
-            #if context.area.type == 'VIEW_3D' and mdl.hud :
+            # if context.region is used for callback_add() the box is drawn over the panel not over the WNIDOW region
             area, region = getArea(mdl.area,'WINDOW')
             #print('area : %s'%area)
             if area and region and mdl.hud :
@@ -379,7 +379,7 @@ class WM_OT_modal(bpy.types.Operator):
                 # if the hud callback function does not exists
                 # tried checkFunctionField() line 229 before.
                 try :
-                    self._hud_callback = self.ctx.callback_add(eval(mdl.hudfunc), (self, context), 'POST_PIXEL')
+                    self._hud_callback = region.callback_add(eval(mdl.hudfunc), (self, context), 'POST_PIXEL')
                 except :
                     mdl._inst[0] = False
                     mdl._inst[1] = False
